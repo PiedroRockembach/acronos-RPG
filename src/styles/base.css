@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+button {
+    background-color: rgb(85, 75, 90);
+    box-shadow: none;
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+}
+.page {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100vw;
+    height: 100vh;
+}
