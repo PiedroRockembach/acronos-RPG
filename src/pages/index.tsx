@@ -1,19 +1,27 @@
-import { useEffect } from "react";
-import User from '../models/User'
+import { useEffect, useState } from "react";
+import { User } from '../models/Users'
 import { useRouter } from 'next/router'
-import LocalStorage from '../utils/LocalStorage'
+import firesotoreDatabase from "@/database";
+
+import Jwt from "@/utils/Jwt";
+
 export default function home() {
   const router = useRouter()
-  useEffect(() => {
-    const user: User | null = LocalStorage.getUser() as User;
-    if(user == null) {
-      router.push("/Login")
+  const [user, setUser] = useState({} as User);
+
+  const handleLocalUser = async () => {
+    const curUser = firesotoreDatabase._auth.currentUser
+    if (!curUser) {
+      router.push("/Login");
+      return;
     }
-    console.log(user);
+    router.push("/Lobby");
+  }
+  useEffect(() => {
+    handleLocalUser();   
   }, []);
   return (
     <>
-    <h1>Hello World</h1>
     </>
   );
   

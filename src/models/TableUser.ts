@@ -1,4 +1,4 @@
 export default interface TableUser {
-    table_id: number,
+    table_id: string,
     user_id: string,
 }

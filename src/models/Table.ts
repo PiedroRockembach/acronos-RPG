@@ -1,5 +1,5 @@
-export default interface Table {
-    table_id: number,
-    name: string,
-    password: string,
+export default interface ITable {
+    table_id?: string,
+    table_name: string,
+    owner_name:string
 }

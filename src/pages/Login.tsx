@@ -1,25 +1,28 @@
-import React from "react"
-import { Button } from 'react-bootstrap';
+import React, { useEffect } from "react"
+import { Button } from '../components/ui/button'
 import { LoginWithPopup } from '../utils/Auth'
 import LocalStorage from "@/utils/LocalStorage";
-import User from "@/models/User";
+import { User } from "@/models/Users";
 import { useRouter } from "next/router";
+import Jwt from "@/utils/Jwt";
 
 export default function Login() {
     const router = useRouter();
     const login = async () => {
-        const user: User = await LoginWithPopup();
-        LocalStorage.setUser(user);
-        if(LocalStorage.getUser()) {
-            router.push('/')
-        }
+        const user: User | null = await LoginWithPopup();
+        if(!user) return;
+        
+        const token: string | null = Jwt.SignToken(user)
+        
+        LocalStorage.setUser(token!);
+        router.push('/')
     }
     return (
-        <>
-            <h1>fazer login</h1>
-            <Button variant="Danger" onClick={ login }>
-                Login
+        <section className="login page">
+            
+            <Button variant="destructive" onClick={ login }>
+                Login Com Google
             </Button>
-        </>
+        </section>
     );
 }
