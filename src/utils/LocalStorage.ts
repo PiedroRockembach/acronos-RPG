@@ -1,15 +1,15 @@
-import User from "../models/User";
+import {User} from "../models/Users";
 
 const USER = "user"
 
-function getUser() : User | null {
-    const storage = localStorage.getItem(USER);
+function getUser() : string | null {
+    const storage = localStorage.getItem(USER) || null;
     if (!storage) return null;
-    return JSON.parse(storage);
+    return storage;
 }
 
-function setUser(user: User) : void {
-    localStorage.setItem(USER, JSON.stringify(user));
+function setUser(user: string) : void {
+    localStorage.setItem(USER, user);
 }
 
 
