@@ -2,12 +2,13 @@ import Header from '../components/Header'
 import React, { useEffect, useState } from 'react'
 import Jwt from '../utils/Jwt'
 import { User } from '../models/Users';
-
 import ITable from '../models/Table'
 import firesotoreDatabase from '../database'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { collection, query, orderBy, where } from '@firebase/firestore';
 import { User as IUser } from '@firebase/auth';
+import BoardList from '../components/BoardList'
+
 import {
     DropdownMenu,
     DropdownMenuTrigger,
@@ -17,15 +18,7 @@ import {
     DropdownMenuItem,
 } from '../components/ui/dropdown-menu'
 
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableRow,
-    TableCell,
-    TableHead
 
-} from '../components/ui/table'
 import { Dialog, DialogContent,DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogPortal, DialogOverlay, DialogClose, DialogFooter} from '../components/ui/dialog'
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
@@ -116,12 +109,11 @@ export default function Lobby() {
             </DialogPortal>
         </Dialog>
         </Header>
-        <div>
-            {
-                !loadingTables && tables.map(tab => tab && <h1 key={tab.table_id}>{tab.table_name}</h1>)
-            }
+        {
+            !loadingTables && <BoardList boards={tables} />
+        }
             
-        </div>
+     
         </section>
     );
 }

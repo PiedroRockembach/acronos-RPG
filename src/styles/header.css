@@ -9,14 +9,13 @@
     color: #fdfdfd;
 
 }
-
 .component-header-nav {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-around;
+    gap: 20px;
     align-items: center;
     align-self: center;
-    flex-shrink: 1;
 }
 
 .component-header-profile-img {

@@ -27,7 +27,6 @@ function getUserFromToken(): User | null {
     const token = LocalStorage.getUser()
     return verifyToken(token!);
 }
-
 export default {
     SignToken,
     verifyToken,

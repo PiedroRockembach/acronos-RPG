@@ -12,8 +12,11 @@ function setUser(user: string) : void {
     localStorage.setItem(USER, user);
 }
 
-
+function Clear() {
+    localStorage.clear();
+}
 export default {
     getUser,
-    setUser
+    setUser,
+    Clear,
 }

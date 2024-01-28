@@ -10,11 +10,11 @@ export default function home() {
   const [user, setUser] = useState({} as User);
 
   const handleLocalUser = async () => {
-    const curUser = firesotoreDatabase._auth.currentUser
-    if (!curUser) {
-      router.push("/Login");
-      return;
-    }
+    const curUser = Jwt.getUserFromToken()
+    if (!curUser) return router.push("/Login");
+
+    const userData = await firesotoreDatabase.GetUserByEmail(curUser.email);
+    if (!userData) return router.push("/Login");
     router.push("/Lobby");
   }
   useEffect(() => {

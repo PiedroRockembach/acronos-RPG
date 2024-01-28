@@ -46,6 +46,26 @@ class FirestoreDatabase implements IDatabase {
         
 
     }
+    async GetUserById(id: string): Promise<User | null> {
+        const userRef = collection(db, "users");
+        const q = query(userRef, where("google_id", '==', id))
+        const snap = await getDocs(q);
+        let user: User | null = null;
+        snap.forEach((u) => {
+            const data = u.data() as User
+            if(data.email) {
+                user = {
+                    email: data.email,
+                    name: data.name,
+                    google_id: data.google_id,
+                    photoURL: data.photoURL
+                }
+            }  
+        })
+        return user;
+        
+
+    }
     async AddUser(user: User): Promise<User> {
         try {
             console.log('user: ', user);
@@ -111,6 +131,17 @@ class FirestoreDatabase implements IDatabase {
         } catch {
             return {} as Table
         }
+    }
+    async addPlayerToTable(props:any): Promise<User | null> {
+        const {email, tableId, tableName} = props;
+        const user:User = await this.GetUserByEmail(email) as User;
+        if(!user) return null;
+        const newDoc: TableUser = {
+            table_id: tableId,
+            user_id: user.google_id
+        }
+        await setDoc(doc(this._database, 'table-user', `${tableName}-${user.name}`), newDoc)
+        return user;
     }
 
 }
