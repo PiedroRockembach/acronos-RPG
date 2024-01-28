@@ -14,11 +14,15 @@ function getUser() : string | null {
 }
 
 function setUser(user: string) : void {
-    localStorage.setItem(USER, user);
+    if(typeof window !== 'undefined') {
+        localStorage.setItem(USER, user);
+    }
 }
 
 function Clear() {
-    localStorage.clear();
+    if(typeof window !== 'undefined') {
+        localStorage.clear()
+    }
 }
 export default {
     getUser,
