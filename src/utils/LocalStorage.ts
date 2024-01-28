@@ -1,11 +1,16 @@
 import {User} from "../models/Users";
+import React from "react";
 
 const USER = "user"
 
+
 function getUser() : string | null {
-    const storage = localStorage.getItem(USER) || null;
-    if (!storage) return null;
-    return storage;
+    if (typeof window !== 'undefined') {
+        const storage = localStorage.getItem(USER) || null;
+        if (!storage) return null;
+        return storage;
+    }
+    return null
 }
 
 function setUser(user: string) : void {

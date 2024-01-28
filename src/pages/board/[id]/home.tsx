@@ -67,13 +67,13 @@ export default function Board() {
     return (
 
         <section className="page board-home">
-            <Header name={user.name} photoURL={user.photoURL} page={table.table_name}>
+            <Header name={user.name} photoURL={user.photoURL} page={table?.table_name || ''}>
             <Dialog>
 
                 <DropdownMenu>
                     <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem>Adiciona</DropdownMenuItem>
+                        <DropdownMenuItem></DropdownMenuItem>
                         <DropdownMenuSub>
                             <DropdownMenuSubTrigger>Convidar Jogadores</DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
