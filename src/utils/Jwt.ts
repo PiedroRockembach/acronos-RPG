@@ -24,8 +24,12 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY || "nevergonnagiveyouupnevergonnalet
 }
 
 function getUserFromToken(): User | null {
-    const token = LocalStorage.getUser()
-    return verifyToken(token!);
+     if(typeof window !== 'undefined') {
+        const token = LocalStorage.getUser()
+        return verifyToken(token!);
+    }
+    return null
+    
 }
 export default {
     SignToken,
