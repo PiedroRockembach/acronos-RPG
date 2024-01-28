@@ -30,9 +30,9 @@ export default function Lobby() {
     const [nameError, setNameError] = useState(false);
     const [tables, setTables] = useState([] as ITable[]);
 
-    const [tablesSnapshot, loadingTables, error] =window && useCollection(query(collection(firesotoreDatabase._database, 'table-user'), where('user_id', '==', Jwt.getUserFromToken()?.google_id)), {
+    const [tablesSnapshot, loadingTables, error] = typeof window !== 'undefined' ? useCollection(query(collection(firesotoreDatabase._database, 'table-user'), where('user_id', '==', Jwt.getUserFromToken()?.google_id)), {
         snapshotListenOptions: { includeMetadataChanges: true}
-    } )
+    } ): []
     const createTable = async () => {
         const newTable: ITable = {
             table_name: tableName,
